@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+      }
+      #contact-support {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: grid;
+        gap: 15px;
+      }
+
+      label {
+        font-weight: bold;
+        color: #333;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background: #004080;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #003366;
+      }
+
+      .support-info {
+        margin-top: 30px;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 6px;
+      }
+
+      .support-info h3 {
+        color: #004080;
+        margin-bottom: 10px;
+      }
+
+      .support-info p {
+        margin: 5px 0;
+        color: #555;
+      }
+
+      .live-chat {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .live-chat button {
+        background: #ffcc00;
+        color: #004080;
+        font-weight: bold;
+      }
+
+      .live-chat button:hover {
+        background: #e6b800;
+      }
+      @media (max-width: 700px) {
+        .back-icon a i {
+          position: relative;
+          top: 39px;
+          left: 18px;
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>7
+  <body>
+    <!-- contact-support -->
+    <section
+      style="
+        background: linear-gradient(
+            rgba(0, 64, 128, 0.8),
+            rgba(0, 64, 128, 0.8)
+          ),
+          url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80)
+            no-repeat center / cover;
+      "
+    >
+      <div class="back-icon">
+        <a href="index7.html"
+          ><i
+            class="fa-solid fa-backward"
+            style="position: relative; top: 50px; left: 50px; font-size: 30px"
+          ></i
+        ></a>
+      </div>
+      <div id="contact-support">
+        <h2>Contact & Support</h2>
+        <!-- Contact Form -->
+        <form id="contactForm">
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+          <label for="email">Your Email:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
+          <label for="message">Message:</label>
+          <textarea
+            id="message"
+            rows="5"
+            placeholder="Write your message..."
+            required
+          ></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <!-- Support Info -->
+        <div class="support-info">
+          <h3>Helpline Numbers</h3>
+          <p>📞 Student Scholarship Helpline: +91-1800-123-456</p>
+          <p>📞 Farmer Loan Helpline: +91-1800-987-654</p>
+          <h3>Email Support</h3>
+          <p>✉️ General Queries: support@scholarloan.in</p>
+          <p>✉️ Scholarship Queries: scholarship@scholarloan.in</p>
+          <p>✉️ Loan Queries: loan@scholarloan.in</p>
+        </div>
+        <!-- Live Chat Option -->
+        <div class="live-chat">
+          <button onclick="startChat()">💬 Start Live Chat</button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

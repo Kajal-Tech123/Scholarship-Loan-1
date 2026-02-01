@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scholar Loan</title>
+    <link rel="stylesheet" href="media.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+      }
+      .menu-icon {
+        position: relative;
+        right: 50%;
+      }
+      .close-icon {
+        z-index: 6000;
+        position: relative;
+        left: -50%;
+        font-size: 30px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: #1a1a2e;
+        color: #fff;
+        position: relative;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      } /* Navigation links */
+      nav {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        position: relative;
+        top: -30%;
+      }
+      nav a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+      nav a:hover {
+        color: #00adb5;
+      } /* CTA button */
+      .cta-button {
+        background: #00adb5;
+        border: none;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .cta-button:hover {
+        background: #007f82;
+      } /* Hamburger & Close icons */
+      .menu-icon,
+      .close-icon {
+        font-size: 1.8rem;
+        cursor: pointer;
+        display: none; /* hidden on desktop */
+      } /* Responsive styles */
+      @media (max-width: 768px) {
+        nav {
+          position: absolute;
+          top: 60px;
+          right: 0;
+          background: #1a1a2e;
+          flex-direction: column;
+          padding: 20px;
+          display: none; /* hidden by default */
+        }
+        nav.show {
+          display: flex; /* show when toggled */
+        }
+        .menu-icon {
+          display: block;
+        }
+        .close-icon {
+          display: none;
+        }
+      }
+
+      /* ---------hero-section-css--------- */
+      .hero {
+        background:
+          linear-gradient(rgba(0, 64, 128, 0.8), rgba(0, 64, 128, 0.8)),
+          url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")
+            no-repeat center/cover;
+
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 0 20px;
+      }
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 600px;
+      }
+      .search-box {
+        display: flex;
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .search-box input {
+        flex: 1;
+        border: none;
+        padding: 15px 20px;
+        font-size: 1rem;
+        outline: none;
+      }
+      .search-box button {
+        background: #ffcc00;
+        border: none;
+        padding: 15px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        color: #004080;
+        transition: background 0.3s ease;
+      }
+      .search-box button:hover {
+        background: #e6b800;
+      }
+      h2 {
+        margin-top: 50px;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #004080;
+      }
+      .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+      .card h3 {
+        color: #004080;
+        margin-bottom: 15px;
+      }
+      .card p {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      .card button {
+        background: #004080;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .card button:hover {
+        background: #003366;
+      }
+
+      /* ---------eligibility-checker--------- */
+      #eligibility-checker {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .submit-btn {
+        background: #004080;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #003366;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        background: #e6f0ff;
+        border-left: 4px solid #004080;
+        border-radius: 4px;
+        display: none;
+      }
+
+      .guide-section {
+        max-width: 900px;
+        margin: auto;
+        text-align: center;
+      }
+
+      h2 {
+        color: #004080;
+        margin-bottom: 40px;
+      }
+
+      .timeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 90%;
+        height: 4px;
+        background: #ccc;
+        z-index: 0;
+      }
+
+      .step {
+        position: relative;
+        z-index: 1;
+        background: white;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .step:hover {
+        transform: scale(1.1);
+      }
+
+      .step i {
+        font-size: 2rem;
+        color: #004080;
+      }
+
+      .label {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .step-container {
+        text-align: center;
+        flex: 1;
+      }
+
+      .Question-box {
+        max-width: 800px;
+        margin: auto;
+      }
+
+      h2 {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 30px;
+      }
+
+      .faq {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+
+      .faq-header {
+        padding: 15px 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        color: #004080;
+      }
+
+      .faq-header:hover {
+        background: #e6f0ff;
+      }
+
+      .faq-header i {
+        transition: transform 0.3s ease;
+      }
+
+      .faq-content {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 20px;
+        background: #f9f9f9;
+        transition:
+          max-height 0.4s ease,
+          padding 0.3s ease;
+      }
+
+      .faq.active .faq-content {
+        max-height: 200px; /* enough space for text */
+        padding: 15px 20px;
+      }
+
+      .faq.active .faq-header i {
+        transform: rotate(180deg);
+      }
+
+      /* testimonial-css */
+      .testimonial-box {
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+      }
+
+      h2 {
+        color: #004080;
+        margin-bottom: 30px;
+      }
+
+      .testimonial-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .testimonial-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .testimonial-card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border: 3px solid #004080;
+      }
+
+      .testimonial-card p {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 15px;
+        font-style: italic;
+      }
+
+      .testimonial-card h4 {
+        color: #004080;
+        margin-bottom: 5px;
+      }
+
+      .testimonial-card span {
+        font-size: 0.85rem;
+        color: #777;
+      }
+
+      /* updates */
+      .udeate h2 {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 20px;
+      }
+
+      .ticker {
+        background: #004080;
+        color: white;
+        padding: 10px;
+        overflow: hidden;
+        position: relative;
+        border-radius: 6px;
+      }
+
+      .ticker p {
+        display: inline-block;
+        white-space: nowrap;
+        animation: scroll 35s linear infinite;
+        font-size: 1rem;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      /* Scholarship Calculator */
+      #scholarship-calculator {
+        max-width: 800px;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+      #loan-calculator {
+        max-width: 800px !important;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      #Scholarship-Calculator-button {
+        background: #004080;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #003366;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        background: #e6f0ff;
+        border-left: 4px solid #004080;
+        border-radius: 4px;
+        display: none;
+      }
+
+      /* download-section */
+      .download-section {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #004080;
+        margin-bottom: 20px;
+      }
+
+      .download-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .download-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f9f9f9;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+
+      .download-list li:hover {
+        background: #e6f0ff;
+      }
+
+      .download-list span {
+        font-weight: bold;
+        color: #004080;
+      }
+
+      .download-list a {
+        background: #004080;
+        color: white;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+
+      .download-list a:hover {
+        background: #003366;
+      }
+
+      /* -------------footer---------------- */
+      footer {
+        background-color: #003366;
+        
+      }
+      .footer-icons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        height: 100%;
+        margin-top: 20px;
+      }
+
+      .footer-icons li {
+        list-style-type: none;
+        text-decoration: none;
+      }
+
+      .footer-icons i{
+        display: flex;
+        list-style: none;
+        background: #498acb;
+        padding: 20px;
+        height: 20px;
+        width: 20px;
+        font-size: 18px;
+        border-radius: 50%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .footer-icons i:hover {
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">ScholarLoan</div>
+      <nav id="nav">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#loan">Loans</a>
+        <a href="#faqs">FAQs</a>
+        <a href="contact.html">Contact</a>
+        <button class="cta-button">Apply Now</button>
+      </nav>
+      <span class="menu-icon" id="menu-icon">&#9776;</span>
+      <!-- Hamburger -->
+      <span class="close-icon" id="close-icon">&times;</span>
+      <!-- Cross -->
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="hero-head">Find Your Scholarship & Loan</h1>
+      <p>
+        Search for CBSE, Bihar Board, UP Board scholarships or loans for farmers
+        and Divyang individuals.
+      </p>
+      <div class="search-box">
+        <input type="text" placeholder="Search scholarships or loans..." />
+        <button>Search</button>
+      </div>
+    </section>
+
+    <section id="loan">
+      <h2>Scholarships & Loan Programs</h2>
+      <div class="card-container">
+        <div class="card">
+          <img src="img1.avif" alt="" style="object-fit: cover; width: 100%" />
+          <h3>CBSE Student Scholarship</h3>
+          <p>
+            Financial aid for meritorious CBSE students to continue higher
+            education.
+          </p>
+          <button><a href="CBSE.html">Apply Now</a></button>
+        </div>
+        <div class="card">
+          <img src="img1.avif" alt="" style="object-fit: cover; width: 100%" />
+          <h3>Bihar Board Scholarship</h3>
+          <p>
+            Support for Bihar Board students pursuing graduation and
+            professional courses.
+          </p>
+          <button>Apply Now</button>
+        </div>
+        <div class="card">
+          <img src="img1.avif" alt="" style="object-fit: cover; width: 100%" />
+          <h3>UP Board Scholarship</h3>
+          <p>
+            Scholarship scheme for UP Board students to reduce financial burden.
+          </p>
+          <button>Apply Now</button>
+        </div>
+        <div class="card">
+          <img src="img1.avif" alt="" style="object-fit: cover; width: 100%" />
+          <h3>Loan for Farmers</h3>
+          <p>
+            Affordable loans for farmers to support agriculture and rural
+            development.
+          </p>
+          <button>Apply Now</button>
+        </div>
+        <div class="card">
+          <img src="img1.avif" alt="" style="object-fit: cover; width: 100%" />
+          <h3>Loan for Divyang (Disabled)</h3>
+          <p>
+            Special loan schemes for differently-abled individuals to empower
+            independence.
+          </p>
+          <button>Apply Now</button>
+        </div>
+        <div class="card">
+          <img src="img1.avif" alt="" style="object-fit: cover; width: 100%" />
+          <h3>Loan for Ladies</h3>
+          <p>
+            Special loan schemes for women to support financial independence,
+            entrepreneurship, and personal growth.
+          </p>
+          <button>Apply Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------eligibilty-checker----------- -->
+    <section
+      style="
+        margin-top: 100px;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+        background: #498acb;
+        padding-bottom: 100px;
+        padding-top: 100px;
+      "
+    >
+      <div id="eligibility-checker">
+        <h2>Scholarship Eligibility Checker</h2>
+        <form id="checkerForm" style="margin-top: 50px; z-index: 2000">
+          <label for="class">Select Class:</label>
+          <select id="class" required>
+            <option value="">--Choose Class--</option>
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+            <option value="11">Class 11</option>
+            <option value="12">Class 12</option>
+          </select>
+          <label for="board">Select Board:</label>
+          <select id="board" required>
+            <option value="">--Choose Board--</option>
+            <option value="CBSE">CBSE</option>
+            <option value="Bihar">Bihar Board</option>
+            <option value="UP">UP Board</option>
+          </select>
+          <label for="income">Family Income (per year in ₹):</label>
+          <input
+            type="number"
+            id="income"
+            placeholder="Enter income"
+            required
+          />
+          <button type="submit" class="submit-btn">Check Eligibility</button>
+        </form>
+        <div class="result" id="result"></div>
+      </div>
+    </section>
+
+    <!-- Application Process Guide -->
+    <section class="guide-section">
+      <h2>Application Process Guide</h2>
+      <div class="timeline">
+        <div class="step-container">
+          <div class="step"><i class="fas fa-file-alt"></i></div>
+          <div class="label">Apply</div>
+        </div>
+        <div class="step-container">
+          <div class="step"><i class="fas fa-search"></i></div>
+          <div class="label">Verification</div>
+        </div>
+        <div class="step-container">
+          <div class="step"><i class="fas fa-check-circle"></i></div>
+          <div class="label">Approval</div>
+        </div>
+        <div class="step-container">
+          <div class="step"><i class="fas fa-hand-holding-usd"></i></div>
+          <div class="label">Disbursement</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frequently Asked Questions -->
+    <section class="Question-box" id="faqs">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <div class="faq-header">
+          <span>Who can apply?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-content">
+          <p>
+            Students from recognized boards (CBSE, Bihar, UP) and eligible
+            farmers/divyang individuals can apply based on scheme criteria.
+          </p>
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-header">
+          <span>What documents are needed?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-content">
+          <p>
+            Common documents include Aadhaar card, income certificate, mark
+            sheets, caste/disability certificate (if applicable), and bank
+            details.
+          </p>
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-header">
+          <span>How do I apply online?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-content">
+          <p>
+            You can apply through the official scholarship portals or government
+            loan websites. Fill the form, upload documents, and submit.
+          </p>
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-header">
+          <span>When will I receive the scholarship/loan?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-content">
+          <p>
+            After verification and approval, funds are usually disbursed
+            directly to your bank account within 2–3 months.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials & Success Stories -->
+    <section>
+      <h2>Testimonials & Success Stories</h2>
+      <div class="testimonial-container">
+        <div class="testimonial-card">
+          <img
+            src="https://randomuser.me/api/portraits/women/44.jpg"
+            alt="Student"
+          />
+          <p>
+            "Thanks to the CBSE scholarship, I was able to continue my higher
+            studies without financial stress."
+          </p>
+          <h4>Priya Sharma</h4>
+          <span>CBSE Student</span>
+        </div>
+        <div class="testimonial-card">
+          <img
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            alt="Farmer"
+          />
+          <p>
+            "The farmer loan helped me buy new equipment and increase my crop
+            yield. Truly life-changing."
+          </p>
+          <h4>Ramesh Kumar</h4>
+          <span>Farmer</span>
+        </div>
+        <div class="testimonial-card">
+          <img
+            src="https://randomuser.me/api/portraits/women/68.jpg"
+            alt="Student"
+          />
+          <p>
+            "UP Board scholarship gave me the confidence to pursue engineering.
+            I’m grateful for the support."
+          </p>
+          <h4>Anjali Verma</h4>
+          <span>UP Board Student</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- update -->
+    <section class="update">
+      <h2>Latest Updates</h2>
+      <div class="ticker">
+        <p>
+          📢 CBSE Single Girl Child Scholarship applications open till 31st Jan
+          • 🗓 Bihar Board Scholarship deadline extended to 15th Feb • 🌾 New
+          Farmer Loan scheme announced for 2026 • 🎓 INSPIRE Scholarship results
+          to be declared soon
+        </p>
+      </div>
+    </section>
+
+    <!-- Scholarship Calculator -->
+    <div
+      class="calculator"
+      style="display: flex; gap: 20px; justify-content: center"
+    >
+      <section id="scholarship-calculator">
+        <h2>Scholarship Amount Calculator</h2>
+        <form id="scholarshipForm">
+          <label for="class">Select Class:</label>
+          <select id="class" required>
+            <option value="">--Choose Class--</option>
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+            <option value="11">Class 11</option>
+            <option value="12">Class 12</option>
+          </select>
+          <label for="board">Select Board:</label>
+          <select id="board" required>
+            <option value="">--Choose Board--</option>
+            <option value="CBSE">CBSE</option>
+            <option value="Bihar">Bihar Board</option>
+            <option value="UP">UP Board</option>
+          </select>
+          <button type="submit" id="Scholarship-Calculator-button">
+            Calculate Scholarship
+          </button>
+        </form>
+        <div class="result" id="scholarshipResult"></div>
+      </section>
+      <!-- Loan EMI Calculator -->
+      <section id="loan-calculator">
+        <h2>Loan EMI Calculator</h2>
+        <form id="loanForm">
+          <label for="amount">Loan Amount (₹):</label>
+          <input
+            type="number"
+            id="amount"
+            placeholder="Enter loan amount"
+            required
+          />
+          <label for="rate">Interest Rate (% per year):</label>
+          <input
+            type="number"
+            id="rate"
+            placeholder="Enter interest rate"
+            required
+          />
+          <label for="tenure">Tenure (in years):</label>
+          <input
+            type="number"
+            id="tenure"
+            placeholder="Enter tenure"
+            required
+          />
+          <button type="submit" id="Scholarship-Calculator-button">
+            Calculate EMI
+          </button>
+        </form>
+        <div class="result" id="loanResult"></div>
+      </section>
+    </div>
+
+    <!-- download-section -->
+    <section style="margin-top: 50px" class="dow-sec">
+      <div id="downloands" class="download-section">
+        <h2>Download Forms & Guidelines</h2>
+        <ul class="download-list">
+          <li>
+            <span>CBSE Scholarship Application Form (PDF)</span>
+            <a href="forms/cbse-scholarship.pdf" download>Download</a>
+          </li>
+          <li>
+            <span>Bihar Board Scholarship Guidelines (PDF)</span>
+            <a href="forms/bihar-guidelines.pdf" download>Download</a>
+          </li>
+          <li>
+            <span>UP Board Scholarship Brochure (PDF)</span>
+            <a href="forms/up-brochure.pdf" download>Download</a>
+          </li>
+          <li>
+            <span>Farmer Loan Application Form (PDF)</span>
+            <a href="forms/farmer-loan.pdf" download>Download</a>
+          </li>
+          <li>
+            <span>Divyang Loan Scheme Details (PDF)</span>
+            <a href="forms/divyang-loan.pdf" download>Download</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ------------------footer--------------------- -->
+    <footer class=" d-flex my-3 text-white justify-content-center">
+      <ul class="footer-icons no-style">
+        <li class="no-style"><i class="fa-brands fa-instagram" class="footer-icon"></i></li>
+        <li><i class="fa-brands fa-facebook-f" class="footer-icon"></i></li>
+        <li><i class="fa-brands fa-youtube" class="footer-icon"></i></li>
+        <li><i class="fa-brands fa-linkedin-in" class="footer-icon"></i></li>
+      </ul>
+     
+    </footer>
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+      integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
